@@ -7,28 +7,30 @@
 
 <%@include file="head.jsp"%>
 
-<div class="container">
-   
-    <form method="POST">
-      <div class="form-group row">
-        <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
-        <div class="col-sm-10">
-          <input name="email" type="email" class="form-control" id="inputEmail3" placeholder="Email">
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
-        <div class="col-sm-10">
-          <input name="password" type="password" class="form-control" id="inputPassword3" placeholder="Password">
-        </div>
-      </div>
-        
-      <div class="form-group row">
-        <div class="col-sm-10">
-          <button type="submit" class="btn btn-primary">Sign in</button>
-        </div>
-      </div>
-    </form>
-</div>
+<form id="studentForm" class="container content">
+
+            <div class="imgcontainer">
+                <img src="img_avatar2.png" alt="Avatar" class="avatar"></img>
+            </div>
+
+          <div class="container contents">
+            <label for="uname"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="uname"></input>
+
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw"></input>
+
+            <button type="submit">Login</button>
+            <label>
+              <input type="checkbox" checked="checked" name="remember"> Remember me</input>
+            </label>
+          </div>
+
+          <div class="container contents" style="background-color:#f1f1f1">
+            <button type="button" class="cancelbtn">Login with Facebook</button>
+            <button type="button" class="cancelbtn">Login with Gmail</button>
+          </div>
+                    
+        </form>
 
 <%@include file="footer.jsp"%>
