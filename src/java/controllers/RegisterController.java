@@ -92,8 +92,8 @@ public class RegisterController extends HttpServlet {
         u.setAnonymous(false);
         
         rs.registerUser(u);
-        HttpSession session = request.getSession();
-        session.setAttribute("user_id", u.getId());
+        //HttpSession session = request.getSession();
+        //session.setAttribute("user_id", u.getId());
         
         response.sendRedirect(request.getContextPath() + "/login");
     }

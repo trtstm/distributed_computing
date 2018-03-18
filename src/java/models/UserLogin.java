@@ -27,7 +27,7 @@ import javax.validation.constraints.Size;
 
 @NamedQueries({
     //Some native sql queries to be performed. 
-    @NamedQuery(name = "UserLogin.selectSinceDate", query = "SELECT ul FROM UserLogin ul WHERE ul.user = :user and ul.datetime >= :datetime")
+    @NamedQuery(name = "UserLogin.selectSinceDate", query = "SELECT ul FROM UserLogin ul WHERE ul.user = :user and ul.datetime >= :datetime ORDER BY ul.datetime DESC")
 })
 
 /**

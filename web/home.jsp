@@ -5,7 +5,7 @@
 --%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 
-<%@include file="head.jsp"%>
+<%@include file="head_with_nav.jsp"%>
     <div class="navbar navbar-inverse navbar-static-top" role="navigation">
 
             <div class="navbar-header">
