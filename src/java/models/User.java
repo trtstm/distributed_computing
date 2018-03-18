@@ -22,7 +22,10 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     //Some native sql queries to be performed. 
     @NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id"),
-    @NamedQuery(name = "User.findByEmailAndPassword", query = "SELECT u FROM User u WHERE u.email = :email AND u.password = :password")
+    @NamedQuery(name = "User.findByEmailAndPassword", query = "SELECT u FROM User u WHERE u.email = :email AND u.password = :password"),
+    @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
+    @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username")
+
 })
 
 /**
@@ -89,7 +92,7 @@ public class User implements Serializable {
     private Gender gender;
         
     @Transient
-    Boolean anonymous;
+    boolean anonymous = false;
         
     public String getEmail() {
         return email;
@@ -147,11 +150,11 @@ public class User implements Serializable {
         this.gender = gender;
     }
    
-    public Boolean isAnonymous() {
+    public boolean isAnonymous() {
         return this.anonymous;
     }
     
-    public void setAnonymous(Boolean anonymous) {
+    public void setAnonymous(boolean anonymous) {
         this.anonymous = anonymous;
     }
 

@@ -7,6 +7,8 @@ package controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
@@ -17,7 +19,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.User;
+import repositories.UserRepository;
 import services.RegistrationService;
+import utils.ErrorMap;
+import validators.UserValidator;
 
 /**
  *
@@ -28,34 +33,10 @@ public class RegisterController extends HttpServlet {
     @EJB
     private RegistrationService rs;
     
+    @EJB
+    private UserValidator userValidator;
     
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RegisterController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RegisterController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -67,6 +48,11 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        User user = (User)(request.getSession().getAttribute("user"));
+        if(!user.isAnonymous()) {
+            response.sendRedirect(request.getContextPath() + "/welcome");
+            return;
+        }
         
         request.getRequestDispatcher("/register.jsp").forward(request, response);
     }
@@ -82,24 +68,28 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String username = request.getParameter("username");
-        String firstName = request.getParameter("first_name");
-        String lastName = request.getParameter("last_name");
-        String country = request.getParameter("country");
-        String gender = request.getParameter("gender");
+        User user = (User)(request.getSession().getAttribute("user"));
+        if(!user.isAnonymous()) {
+            response.sendRedirect(request.getContextPath() + "/welcome");
+            return;
+        }
+
+        userValidator.validate(request);
+
+        if(userValidator.getErrors().hasErrors()) {
+            request.setAttribute("errors", userValidator.getErrors());
+            request.getRequestDispatcher("/register.jsp").forward(request, response);
+        }
         
         User u = new User();
-        u.setCountry(country);
-        u.setEmail(email);
-        u.setFirstName(firstName);
-        u.setLastName(lastName);
-        u.setGender(User.Gender.MALE);
-        u.setUsername(username);
-        u.setPassword(password);
-        u.setAnonymous(Boolean.FALSE);
- 
+        u.setCountry(userValidator.getCountry());
+        u.setEmail(userValidator.getEmail());
+        u.setFirstName(userValidator.getFirstName());
+        u.setLastName(userValidator.getLastName());
+        u.setGender(userValidator.getGender());
+        u.setUsername(userValidator.getUsername());
+        u.setPassword(userValidator.getPassword());
+        u.setAnonymous(false);
         
         rs.registerUser(u);
         HttpSession session = request.getSession();

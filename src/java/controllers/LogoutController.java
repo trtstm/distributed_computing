@@ -19,17 +19,14 @@ import javax.servlet.http.HttpSession;
 import models.User;
 import services.LoginService;
 import services.RegistrationService;
-import utils.ErrorMap;
 
 /**
  *
  * @author timo
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/login"})
-public class LoginController extends HttpServlet {   
-    @EJB
-    private LoginService ls;
-    
+@WebServlet(name = "LogoutController", urlPatterns = {"/logout"})
+public class LogoutController extends HttpServlet {   
+   
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -43,13 +40,8 @@ public class LoginController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        User user = (User)(request.getSession().getAttribute("user"));
-        if(!user.isAnonymous()) {
-            response.sendRedirect(request.getContextPath() + "/welcome");
-            return;
-        }
-        
-        request.getRequestDispatcher("/login.jsp").forward(request, response);
+        request.getSession().invalidate();
+        response.sendRedirect(request.getContextPath() + "/login");
     }
 
     /**
@@ -64,26 +56,7 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        User user = (User)(request.getSession().getAttribute("user"));
-        if(!user.isAnonymous()) {
-            response.sendRedirect(request.getContextPath() + "/welcome");
-            return;
-        }
-        
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        
-        user = ls.login(email, password);
-        if(user == null) {
-            ErrorMap errors = new ErrorMap();
-            errors.addError("login", "Username/password do not match.");
-            request.setAttribute("errors", errors);
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
-            return;
-        }
-        
-        request.getSession().setAttribute("user_id", user.getId());
-        response.sendRedirect(request.getContextPath() + "/welcome");     
+    
     }
 
     /**

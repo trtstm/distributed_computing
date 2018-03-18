@@ -52,7 +52,7 @@ public class LoginFilter implements Filter {
         
         HttpSession session = ((HttpServletRequest)request).getSession();
         User user = (User)session.getAttribute("user");
-        if(user.isAnonymous().equals(Boolean.TRUE)) {
+        if(user.isAnonymous()) {
             HttpServletResponse resp = (HttpServletResponse)response;
             resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
             resp.getWriter().println("ACCESS DENIED");

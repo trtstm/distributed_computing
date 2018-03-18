@@ -57,17 +57,18 @@ public class SessionFilter implements Filter {
                         .getSingleResult();
                 if(rawUser instanceof User) {
                     user = (User)rawUser;
+                    user.setAnonymous(false);
                 } else {
                     user = new User();
-                    user.setAnonymous(Boolean.TRUE);
+                    user.setAnonymous(true);
                 }
             } catch(NoResultException e) {
                 user = new User();
-                user.setAnonymous(Boolean.TRUE);
+                user.setAnonymous(true);
             }
         } else {
             user = new User();
-            user.setAnonymous(Boolean.TRUE);
+            user.setAnonymous(true);
         }
         
         session.setAttribute("user", user);

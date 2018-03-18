@@ -1,13 +1,7 @@
-<%-- 
-    Document   : register
-    Created on : Mar 10, 2018, 2:52:29 PM
-    Author     : timo
---%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 
-<%@include file="head.jsp"%>
-        <select class="selectContainer">
-            <option value="default" title="default">Choose Country</option>
+        <select class="form-control" id="country" name="country">
+            <option value="" title="default">Choose Country</option>
             <option value="Afghanistan" title="Afghanistan">Afghanistan</option>
             <option value="Åland Islands" title="Åland Islands">Åland Islands</option>
             <option value="Albania" title="Albania">Albania</option>
