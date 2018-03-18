@@ -106,7 +106,7 @@ public class LoginFilter implements Filter {
         
         HttpServletRequest req = (HttpServletRequest)request;
         String path = req.getRequestURI().substring(req.getContextPath().length()).replaceAll("[/]+$", "");
-        if(!ALLOWED_PATHS.contains(path) && doBeforeProcessing(request, response).equals(Boolean.FALSE)) {
+        if(!path.startsWith("/resources") && !ALLOWED_PATHS.contains(path) && doBeforeProcessing(request, response).equals(Boolean.FALSE)) {
             return;
         }
         
