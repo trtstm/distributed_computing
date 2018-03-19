@@ -49,6 +49,7 @@ public class LoginController extends HttpServlet {
             return;
         }
         
+        request.setAttribute("page", "login");
         request.getRequestDispatcher("/login.jsp").forward(request, response);
     }
 
@@ -78,6 +79,7 @@ public class LoginController extends HttpServlet {
             ErrorMap errors = new ErrorMap();
             errors.addError("login", "Username/password do not match.");
             request.setAttribute("errors", errors);
+            request.setAttribute("page", "login");
             request.getRequestDispatcher("/login.jsp").forward(request, response);
             return;
         }

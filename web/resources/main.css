@@ -7,8 +7,34 @@
     margin-bottom: 25px;
 }
 
-.register_page_wrapper .btn-register, .login_page_wrapper .btn-login {
+.btn-login {
     width: 100%;
     border-radius: 0;
     margin-bottom: 5px;
+    background-color: #bd081c;
+    color: white;
+}
+
+.btn-login.btn-social {
+    background-color: #236A62;
+}
+
+body.login, body.register {
+    background: url(background.jpg);
+    background-size: contain;
+    background-repeat: repeat;
+}
+
+.form-wrapper {
+    background-color: white;
+    margin: auto;
+    width: 50%;
+    padding: 50px;
+}
+
+.social-wrapper {
+    background-color: #f1f1f1;
+    width: 108%;
+    margin-left: -4%;
+    padding: 4%;
 }

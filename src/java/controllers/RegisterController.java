@@ -54,6 +54,7 @@ public class RegisterController extends HttpServlet {
             return;
         }
         
+        request.setAttribute("page", "register");
         request.getRequestDispatcher("/register.jsp").forward(request, response);
     }
 
@@ -78,6 +79,7 @@ public class RegisterController extends HttpServlet {
 
         if(userValidator.getErrors().hasErrors()) {
             request.setAttribute("errors", userValidator.getErrors());
+            request.setAttribute("page", "register");
             request.getRequestDispatcher("/register.jsp").forward(request, response);
         }
         
