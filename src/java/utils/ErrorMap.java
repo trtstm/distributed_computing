@@ -20,6 +20,10 @@ public class ErrorMap extends HashMap<String, ArrayList<String>> {
         
     }
     
+    public void removeErrors(String name) {
+        this.remove(name);
+    }
+    
     public boolean hasErrors() {
         return size() > 0;
     }

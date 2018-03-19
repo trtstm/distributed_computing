@@ -67,4 +67,8 @@ public class UserRepository {
             
             return null;
     }
+    
+    public void save(User user) {
+        entityManager.merge(user);
+    }
 }

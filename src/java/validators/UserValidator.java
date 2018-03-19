@@ -73,45 +73,39 @@ public class UserValidator {
         errors = new ErrorMap();
         
         String email = request.getParameter("email");
-        if(email.length() < 5 || !email.contains("@")) {
+        if(email == null || email.length() < 5 || !email.contains("@")) {
             errors.addError("email", "Invalid email.");
         } else if(userRepo.getByEmail(email) != null) {
             errors.addError("email", "Email is already taken.");
-        } else {
-            this.email = email;
         }
-        
+        this.email = email;
         
         String password = request.getParameter("password");
         if(password.length() < 5) {
             errors.addError("password", "Password should contain atleast 5 characters.");
-        } else {
-            this.password = password;
         }
+        this.password = password;
         
         String username = request.getParameter("username");
         if(username.length() < 5) {
             errors.addError("username", "Username should contain atleast 5 characters.");
         } else if(userRepo.getByUsername(username) != null) {
             errors.addError("username", "Username is already taken.");
-        } else {
-            this.username = username;
         }
+        this.username = username;
         
         
         String firstName = request.getParameter("first_name");
         if(firstName.length() < 2) {
             errors.addError("first_name", "First name should contain atleast 2 characters.");
-        } else {
-            this.firstName = firstName;
         }
+        this.firstName = firstName;
         
         String lastName = request.getParameter("last_name");
         if(lastName.length() < 2) {
             errors.addError("last_name", "Last name should contain atleast 2 characters.");
-        } else {
-            this.lastName = lastName;
         }
+        this.lastName = lastName;
         
         String country = request.getParameter("country");
         if(country.length() > 0) {

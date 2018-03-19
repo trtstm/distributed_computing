@@ -20,7 +20,7 @@
         <a class="nav-link" href="<c:url value="/stats" />">Stats</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Settings</a>
+        <a class="nav-link" href="<c:url value="/settings" />">Settings</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="<c:url value="/logout" />">Logout</a>
