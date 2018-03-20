@@ -53,9 +53,6 @@ public class LoginFilter implements Filter {
         HttpSession session = ((HttpServletRequest)request).getSession();
         User user = (User)session.getAttribute("user");
         if(user.isAnonymous()) {
-            HttpServletResponse resp = (HttpServletResponse)response;
-            resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            resp.getWriter().println("ACCESS DENIED");
             return Boolean.FALSE;
         }
         
@@ -105,8 +102,10 @@ public class LoginFilter implements Filter {
         }
         
         HttpServletRequest req = (HttpServletRequest)request;
+        HttpServletResponse resp = (HttpServletResponse)response;
         String path = req.getRequestURI().substring(req.getContextPath().length()).replaceAll("[/]+$", "");
         if(!path.startsWith("/resources") && !ALLOWED_PATHS.contains(path) && doBeforeProcessing(request, response).equals(Boolean.FALSE)) {
+            resp.sendRedirect(req.getContextPath() + "/login");
             return;
         }
         
