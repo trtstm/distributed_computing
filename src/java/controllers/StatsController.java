@@ -7,6 +7,8 @@ package controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.User;
 import models.UserLogin;
+import repositories.UserRepository;
 import services.LoginService;
 import services.RegistrationService;
 
@@ -30,6 +33,9 @@ import services.RegistrationService;
 public class StatsController extends HttpServlet {
     @EJB
     LoginService ls;
+    
+    @EJB
+    UserRepository userRepo;
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -45,7 +51,13 @@ public class StatsController extends HttpServlet {
             throws ServletException, IOException {
         
         User user = (User)(request.getSession().getAttribute("user"));
-        List<UserLogin> logins = ls.getLogins(user);
+        
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.add(Calendar.DATE, -14);
+        Date twoWeeksAgo = cal.getTime();
+        
+        List<UserLogin> logins = userRepo.getLoginHistory(user, twoWeeksAgo);
            
         request.setAttribute("logins", logins);
         

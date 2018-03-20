@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.Stateful;
 import javax.ejb.Singleton;
@@ -20,6 +21,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 import models.User;
 import models.UserLogin;
+import repositories.UserRepository;
         
 /**
  *
@@ -27,39 +29,17 @@ import models.UserLogin;
  */
 @Stateless
 public class LoginService {  
-    @PersistenceContext(unitName = "pinterestPU")
-    private EntityManager entityManager;
-
+    @EJB
+    UserRepository userRepo;
     
     
     public User login(String email, String password) {
-            try {
-                Object rawUser = this.entityManager.createNamedQuery("User.findByEmailAndPassword")
-                        .setParameter("email", email)
-                        .setParameter("password", password)
-                        .getSingleResult();
-                if(rawUser instanceof User) {
-                    User u = (User)rawUser;
-                    logLogin(u);
-                    return u;
-                }
-            } catch(NoResultException e) {
-                return null;
-            }
-            
-            return null;
-    }
-    
-    public List<UserLogin> getLogins(User user) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(new Date());
-        cal.add(Calendar.DATE, -14);
-        Date twoWeeksAgo = cal.getTime();
-
-       return this.entityManager.createNamedQuery("UserLogin.selectSinceDate")
-                .setParameter("user", user)
-                .setParameter("datetime", twoWeeksAgo)
-                .getResultList();
+        User user = userRepo.getByEmailAndPassword(email, password);
+        if(user != null) {
+            logLogin(user);
+        }
+        
+        return user;
     }
     
     private void logLogin(User u) {
@@ -67,7 +47,7 @@ public class LoginService {
         ul.setUser(u);
         ul.setDatetime(new Date());
         
-        entityManager.persist(ul);
+        userRepo.addUserLogin(ul);
     }
 
     // Add business logic below. (Right-click in editor and choose

@@ -5,6 +5,7 @@
  */
 package repositories;
 
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -12,6 +13,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 import models.User;
+import models.UserLogin;
         
 @Stateless
 public class UserRepository {  
@@ -68,7 +70,39 @@ public class UserRepository {
             return null;
     }
     
+    public User getByEmailAndPassword(String email, String password) {
+        try {
+            Object rawUser = this.entityManager.createNamedQuery("User.findByEmailAndPassword")
+                    .setParameter("email", email)
+                    .setParameter("password", password)
+                    .getSingleResult();
+            if(rawUser instanceof User) {
+                User u = (User)rawUser;
+                return u;
+            }
+        } catch(NoResultException e) {
+            return null;
+        }
+
+        return null;
+    }
+    
+    public List<UserLogin> getLoginHistory(User user, Date since) {
+       return this.entityManager.createNamedQuery("UserLogin.selectSinceDate")
+                .setParameter("user", user)
+                .setParameter("datetime", since)
+                .getResultList();
+    }
+    
     public void save(User user) {
         entityManager.merge(user);
+    }
+    
+    public void addUser(User user) {
+        entityManager.persist(user);
+    }
+    
+    public void addUserLogin(UserLogin ul) {
+        entityManager.persist(ul);
     }
 }

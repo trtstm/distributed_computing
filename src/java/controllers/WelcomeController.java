@@ -28,9 +28,7 @@ import services.RegistrationService;
  */
 @WebServlet(name = "WelcomeController", urlPatterns = {"/welcome"})
 public class WelcomeController extends HttpServlet {
-    @EJB
-    LoginService ls;
-    
+   
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -45,9 +43,6 @@ public class WelcomeController extends HttpServlet {
             throws ServletException, IOException {
         
         User user = (User)(request.getSession().getAttribute("user"));
-        List<UserLogin> logins = ls.getLogins(user);
-           
-        request.setAttribute("logins", logins);
         
         request.getRequestDispatcher("/welcome.jsp").forward(request, response);
     }
