@@ -1,0 +1,39 @@
+body{
+	font-family: 'Roboto Condensed', sans-serif;
+	background: #333;
+	color: #fff;
+}
+.profile-item{
+
+	padding: 7px;
+	color: white;
+}
+.navbar-light .navbar-brand {
+    color: #00bcf4!important;
+}
+span{
+	font-family: 'Roboto Condensed', sans-serif;
+	font-weight: bold;
+}
+
+.carousel-inner .carousel-item-right.active,
+.carousel-inner .carousel-item-next {
+  transform: translateX(25%);
+}
+
+.carousel-inner .carousel-item-left.active, 
+.carousel-inner .carousel-item-prev {
+  transform: translateX(-25%)
+}
+  
+.carousel-inner .carousel-item-right,
+.carousel-inner .carousel-item-left{ 
+  transform: translateX(0);
+}
+.card{
+
+	background: #e5e5e5;
+}
+.card-title{
+	color: #333;
+}
