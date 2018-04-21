@@ -53,6 +53,11 @@ public class PodcastRepository {
 
         return null;
     }
+    
+    public List<Podcast> getAll() {
+       return this.entityManager.createNamedQuery("Podcast.findAll")
+                .getResultList();
+    }
            
     public void save(Podcast podcast) {
         entityManager.merge(podcast);

@@ -31,6 +31,7 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     //Some native sql queries to be performed. 
     @NamedQuery(name = "Podcast.findById", query = "SELECT p FROM Podcast p WHERE p.id = :id"),
+    @NamedQuery(name = "Podcast.findAll", query = "SELECT p FROM Podcast p"),
     @NamedQuery(name = "Podcast.findByExternalId", query = "SELECT p FROM Podcast p WHERE p.externalId = :id"),    
 })
 
