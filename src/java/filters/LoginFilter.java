@@ -32,7 +32,7 @@ import models.User;
 @WebFilter(filterName = "LoginFilter", urlPatterns = {"/*"})
 public class LoginFilter implements Filter {
     private static final Set<String> ALLOWED_PATHS = Collections.unmodifiableSet(new HashSet<>(
-        Arrays.asList("", "/login", "/logout", "/register", "/resources/background.jpg")));
+        Arrays.asList("", "/login", "/logout", "/register", "/install", "/admin/podcast/add", "/proxy", "/resources/background.jpg")));
     
     private static final boolean debug = true;
 

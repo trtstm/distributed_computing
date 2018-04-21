@@ -88,8 +88,32 @@ public class User implements Serializable {
     private String country;
     
     @Basic(optional = false)
+    @Column(name = "is_admin")
+    private boolean isAdmin = false;
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+    
+    @Basic(optional = false)
     @Column(name = "gender")
     private Gender gender;
+    
+    @Basic(optional = false)
+    @Column(name = "has_categories")
+    private boolean hasCategories = false;
+
+    public boolean hasCategories() {
+        return hasCategories;
+    }
+
+    public void setHasCategories(boolean hasCategories) {
+        this.hasCategories = hasCategories;
+    }
         
     @Transient
     boolean anonymous = false;
