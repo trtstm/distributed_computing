@@ -76,11 +76,30 @@ public class InstallController extends HttpServlet {
         track1.setArtworkUrl("https://i1.sndcdn.com/artworks-000169114022-4xuce5-large.jpg");
         track1.setDuration(2813625);
         track1.setExternalId(new Long(270949310));
-        track1.setStreamUrl("https://api.soundcloud.com/tracks/270949310/stream");
+        track1.setStreamUrl("https://api.soundcloud.com/tracks/271018327/stream");
+        
+        Track track2 = new Track();
+        track2.setTitle("Game Of Thrones Season Finale Preview with Jason Whitlock");
+        track2.setDescription("Jason Whitlock of Fox Sports joins Charlie Wisco and KFC of Barstool New York to talk about the Game of Thrones season finale and recapping season 6.");
+        //track2.setArtworkUrl("");
+        track2.setDuration(2646948);
+        track2.setExternalId(new Long(270949310));
+        track2.setStreamUrl("https://api.soundcloud.com/tracks/270949310/stream");
 
+        Track track3 = new Track();
+        track3.setTitle("Bastard Bowl Recap");
+        track3.setDescription("Charlie, Clem, and Rear Admiral discuss all the happenings in the epic Bastard Bowl, as well as a pleasantly unexpected trip to Mereen.");
+        track3.setArtworkUrl("https://i1.sndcdn.com/artworks-000168336366-3fiww6-large.jpg");
+        track3.setDuration(3093945);
+        track3.setExternalId(new Long(270109179));
+        track3.setStreamUrl("https://api.soundcloud.com/tracks/270109179/stream");
+        
         List<Track> tracks = new ArrayList<Track>();
         tracks.add(track1);
+        tracks.add(track2);
+        tracks.add(track3);
         p.setTracks(tracks);
+        
         podcastService.addPodcast(p);
     }
 
