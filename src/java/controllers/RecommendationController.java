@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -44,7 +45,10 @@ public class RecommendationController extends HttpServlet {
         
         User user = (User)(request.getSession().getAttribute("user"));
         
-        request.getRequestDispatcher("/welcome.jsp").forward(request, response);
+        //String json = new Gson().toJson(someObject);
+        //response.setContentType("application/json");
+        //response.setCharacterEncoding("UTF-8");
+        //response.getWriter().write(json);
     }
 
     /**
