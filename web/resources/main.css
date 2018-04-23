@@ -41,7 +41,7 @@ span{
   transform: translateX(0);
 }
 .card{
-
+    color: black;
 	background: #e5e5e5;
 }
 .card-title{
