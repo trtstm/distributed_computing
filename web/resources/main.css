@@ -3,6 +3,16 @@ body{
 	background: #333;
 	color: #fff;
 }
+
+
+.navbar {
+    color: #fff;
+}
+
+.navbar a {
+    color: #fff;
+}
+
 .profile-item{
 
 	padding: 7px;
@@ -36,4 +46,16 @@ span{
 }
 .card-title{
 	color: #333;
+        font-size: 0.9rem;
+}
+
+.podflix-image {
+    width: 100%;
+    padding-top: 66%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.track-card {
+    margin-bottom: 20px;
 }

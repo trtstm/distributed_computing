@@ -38,6 +38,12 @@ public class UserService {
         boardRepo.add(board);
         userRepo.save(user);
         //boardRepo.save(board);
+    }
+    
+    public void followBoard(User user, Board board) {
+        user.addFollowedBoard(board);
+        board.addFollower(user);
+        userRepo.save(user);
         
     }
 

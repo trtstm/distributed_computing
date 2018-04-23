@@ -44,7 +44,7 @@ public class RecommendationService {
     }
     
     public List<Track> calculateRecommendedTracks(User user) {
-        return trackRepo.getAll();
+        return trackRepo.findRecommendations(user);
     }
 
     // Add business logic below. (Right-click in editor and choose

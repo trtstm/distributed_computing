@@ -91,6 +91,32 @@ public class BoardController extends HttpServlet {
         public UserResponse user;
     }
     
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        User user = (User)(request.getSession().getAttribute("user"));
+
+        List<BoardResponse> userBoards = new ArrayList<BoardResponse>();
+        List<BoardResponse> followedBoards = new ArrayList<BoardResponse>();
+        for(Board board : user.getBoards()) {
+            userBoards.add(new BoardResponse(board));
+        }
+        for(Board board : user.getFollowedBoards()) {
+            followedBoards.add(new BoardResponse(board));
+        }
+        
+        
+        HashMap<String, List<BoardResponse>> result = new HashMap<String, List<BoardResponse>>();
+        result.put("userBoards", userBoards);
+        result.put("followedBoards", followedBoards);
+        
+        String json = new Gson().toJson(result);
+        request.setAttribute("boards", json);
+        
+        request.getRequestDispatcher("/boards.jsp").forward(request, response);
+  
+    }   
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -129,7 +155,7 @@ public class BoardController extends HttpServlet {
             Board board = boardRepo.getById(boardId);
             Track track = trackRepo.getById(trackId);
             
-            if(board.getUser() != user) {
+            if(!board.getUser().getId().equals(user.getId())) {
                 response.setStatus(HttpServletResponse.SC_FORBIDDEN);
                 return;
             }
@@ -150,7 +176,7 @@ public class BoardController extends HttpServlet {
             Board board = boardRepo.getById(boardId);
             Track track = trackRepo.getById(trackId);
             
-            if(board.getUser() != user) {
+            if(!board.getUser().getId().equals(user.getId())) {
                 response.setStatus(HttpServletResponse.SC_FORBIDDEN);
                 return;
             }

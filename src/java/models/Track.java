@@ -33,7 +33,8 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "Track.findById", query = "SELECT p FROM Track p WHERE p.id = :id"),
     @NamedQuery(name = "Track.findAll", query = "SELECT p FROM Track p"),
-    @NamedQuery(name = "Track.findByExternalId", query = "SELECT p FROM Track p WHERE p.externalId = :id"),    
+    @NamedQuery(name = "Track.findByExternalId", query = "SELECT p FROM Track p WHERE p.externalId = :id"),   
+    @NamedQuery(name = "Track.findRecommendations", query = "SELECT t FROM Track t WHERE t.user != :u"),    
 })
 
 /**

@@ -59,6 +59,12 @@ public class TrackRepository {
        return this.entityManager.createNamedQuery("Track.findAll")
                 .getResultList();
     }
+    
+    public List<Track> findRecommendations(User user) {
+       return this.entityManager.createNamedQuery("Track.findRecommendations")
+               .setParameter("u", user)
+                .getResultList();
+    }
            
     public void save(Track track) {
         entityManager.merge(track);

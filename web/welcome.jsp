@@ -9,15 +9,17 @@
 
 <div id="welcome-app">
     
-    <div class="container-fluid">
+    <div class="container">
         
-        <h3>Recommendations</h3>
+        <h3>Recommended For You</h3>
         <div class="row">
-            <div v-for="track in recommendations" class="col-1">
-                <div class="card">
-                  <img class="card-img-top" src="resources/no-image.png" alt="Card image cap">
+            <div v-for="track in recommendations" class="col-3">
+                <div class="card track-card" :title="track.description">
+                  <div class="podflix-image" :style="{backgroundImage: 'url(' + (track.artworkUrl ? track.artworkUrl : 'resources/no-image.png') + ')'}"></div>
                   <div class="card-body">
-                      <p class="card-text"><a :href="rootUrl + '/tracks?id=' + track.id">{{track.title}}</a></p>
+                    <h5 class="card-title">{{track.title}} <small>Uploaded by: {{track.user.username}}</small></h5>
+                    
+                    <a :href="rootUrl + 'tracks?id=' + track.id.toString()" class="">Read More</a>
                   </div>
                 </div>
             </div>

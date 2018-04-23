@@ -149,7 +149,6 @@ public class User implements Serializable {
     }
     
     public void addFollowedBoard(Board board) {
-        board.addFollower(this);
         followedBoards.add(board);
     }
     

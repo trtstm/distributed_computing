@@ -50,11 +50,15 @@ public class RecommendationController extends HttpServlet {
            public Long id;
            public String title;
            public UserResponse user;
+           public String artworkUrl;
+           public String description;
 
            public TrackResponse(Track track) {
                id = track.getId();
                title = track.getTitle();
                user = new UserResponse(track.getUser());
+               artworkUrl = track.getArtworkUrl();
+               description = track.getDescription();
            }
        }
     
