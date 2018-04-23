@@ -1,40 +1,39 @@
-.register_page_wrapper, .login_page_wrapper {
-    margin-top: 50px;
+body{
+	font-family: 'Roboto Condensed', sans-serif;
+	background: #333;
+	color: #fff;
+}
+.profile-item{
+
+	padding: 7px;
+	color: white;
+}
+.navbar-light .navbar-brand {
+    color: #00bcf4!important;
+}
+span{
+	font-family: 'Roboto Condensed', sans-serif;
+	font-weight: bold;
 }
 
-.register_page_wrapper .logo-wrapper, .login_page_wrapper .logo-wrapper {
-    text-align: center;
-    margin-bottom: 25px;
+.carousel-inner .carousel-item-right.active,
+.carousel-inner .carousel-item-next {
+  transform: translateX(25%);
 }
 
-.btn-login {
-    width: 100%;
-    border-radius: 0;
-    margin-bottom: 5px;
-    background-color: #bd081c;
-    color: white;
+.carousel-inner .carousel-item-left.active, 
+.carousel-inner .carousel-item-prev {
+  transform: translateX(-25%)
 }
-
-.btn-login.btn-social {
-    background-color: #236A62;
+  
+.carousel-inner .carousel-item-right,
+.carousel-inner .carousel-item-left{ 
+  transform: translateX(0);
 }
+.card{
 
-body.login, body.register {
-    background: url(background.jpg);
-    background-size: contain;
-    background-repeat: repeat;
+	background: #e5e5e5;
 }
-
-.form-wrapper {
-    background-color: white;
-    margin: auto;
-    width: 50%;
-    padding: 50px;
-}
-
-.social-wrapper {
-    background-color: #f1f1f1;
-    width: 108%;
-    margin-left: -4%;
-    padding: 4%;
+.card-title{
+	color: #333;
 }

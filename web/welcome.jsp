@@ -9,7 +9,21 @@
 
 <div id="welcome-app">
     
-    
+    <div class="container-fluid">
+        
+        <h3>Recommendations</h3>
+        <div class="row">
+            <div v-for="track in recommendations" class="col-1">
+                <div class="card">
+                  <img class="card-img-top" src="resources/no-image.png" alt="Card image cap">
+                  <div class="card-body">
+                      <p class="card-text"><a :href="rootUrl + '/tracks?id=' + track.id">{{track.title}}</a></p>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <script src="resources/welcome.js"></script>

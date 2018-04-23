@@ -2,29 +2,23 @@
 
 <%@include file="head.jsp"%>
 
-<nav class="navbar navbar-expand-md navbar-light bg-light">
-  <a class="navbar-brand" href="#">
-    <img src="resources/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-    Pinterest
-  </a>
-    
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="<c:url value="/welcome" />">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<c:url value="/stats" />">Stats</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<c:url value="/settings" />">Settings</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<c:url value="/logout" />">Logout</a>
-      </li>
-    </ul>
-  </div>
-</nav>
+	<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+	  <a class="navbar-brand" href="#">podflix</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+
+	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	    <ul class="navbar-nav mr-auto">
+	    </ul>
+	    <form class="form-inline my-2 my-lg-0">
+	    	<ul class="navbar-nav mr-auto">
+	    	 	  <li class="profile-item">Homepage</li>
+	    	 	  <li class="profile-item"><span class="oi oi-magnifying-glass" title="magnifying-glass" aria-hidden="true"><span>     Search</span></li>
+			      <li class="profile-item"><span class="oi oi-person" title="person" aria-hidden="true"></span></li>
+				  <li class="profile-item"><span class="oi oi-comment-square" title="comment-square" aria-hidden="true"></span></li>
+			      
+			 </ul>
+	    </form>
+	  </div>
+	</nav>

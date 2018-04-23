@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import models.Track;
 import models.User;
 import models.UserLogin;
 import services.LoginService;
@@ -27,8 +28,8 @@ import services.RegistrationService;
  * @author timo
  */
 @WebServlet(name = "WelcomeController", urlPatterns = {"/welcome"})
-public class WelcomeController extends HttpServlet {
-   
+public class WelcomeController extends HttpServlet {  
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

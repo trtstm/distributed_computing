@@ -16,7 +16,7 @@ import models.User;
 import models.UserLogin;
         
 @Stateless
-public class UserRepository {  
+public class UserRepository {   
     @PersistenceContext(unitName = "pinterestPU")
     private EntityManager entityManager;
     

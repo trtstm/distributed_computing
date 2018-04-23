@@ -1,9 +1,13 @@
 $(function() {
+
    new Vue({
        el: '#welcome-app',
+       components: {
+       },
        data() {
            return {
                recommendations: [],
+               rootUrl: GLOBALS.root_url,
            };
        },
        

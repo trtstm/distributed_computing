@@ -62,13 +62,12 @@ public class InstallController extends HttpServlet {
         admin.setLastName("Admin");
         admin.setPassword("admin");
         admin.setUsername("admin");
-        userRepo.addUser(admin);
         
-        Podcast p = new Podcast();
-        p.setTitle("The Post Game of Thrones Podcast");
-        p.setDescription("");
-        p.setExternalId(new Long(223947935));
-        p.setArtworkUrl("https://i1.sndcdn.com/avatars-000221919404-ujme8y-large.jpg");
+        //Podcast p = new Podcast();
+        //p.setTitle("The Post Game of Thrones Podcast");
+        //p.setDescription("");
+        //p.setExternalId(new Long(223947935));
+        //p.setArtworkUrl("https://i1.sndcdn.com/avatars-000221919404-ujme8y-large.jpg");
         
         Track track1 = new Track();
         track1.setTitle("Season 6 Finale: Boom Goes The High Sparrow");
@@ -76,7 +75,8 @@ public class InstallController extends HttpServlet {
         track1.setArtworkUrl("https://i1.sndcdn.com/artworks-000169114022-4xuce5-large.jpg");
         track1.setDuration(2813625);
         track1.setExternalId(new Long(270949310));
-        track1.setStreamUrl("https://api.soundcloud.com/tracks/271018327/stream");
+        track1.setStreamUrl("https://api.soundcloud.com/tracks/271018327");
+        admin.addTrack(track1);
         
         Track track2 = new Track();
         track2.setTitle("Game Of Thrones Season Finale Preview with Jason Whitlock");
@@ -84,7 +84,8 @@ public class InstallController extends HttpServlet {
         //track2.setArtworkUrl("");
         track2.setDuration(2646948);
         track2.setExternalId(new Long(270949310));
-        track2.setStreamUrl("https://api.soundcloud.com/tracks/270949310/stream");
+        track2.setStreamUrl("https://api.soundcloud.com/tracks/270949310");
+        admin.addTrack(track2);
 
         Track track3 = new Track();
         track3.setTitle("Bastard Bowl Recap");
@@ -92,15 +93,18 @@ public class InstallController extends HttpServlet {
         track3.setArtworkUrl("https://i1.sndcdn.com/artworks-000168336366-3fiww6-large.jpg");
         track3.setDuration(3093945);
         track3.setExternalId(new Long(270109179));
-        track3.setStreamUrl("https://api.soundcloud.com/tracks/270109179/stream");
+        track3.setStreamUrl("https://api.soundcloud.com/tracks/270109179");
+        admin.addTrack(track3);
         
-        List<Track> tracks = new ArrayList<Track>();
-        tracks.add(track1);
-        tracks.add(track2);
-        tracks.add(track3);
-        p.setTracks(tracks);
+        userRepo.addUser(admin);
         
-        podcastService.addPodcast(p);
+        //List<Track> tracks = new ArrayList<Track>();
+        //tracks.add(track1);
+        //tracks.add(track2);
+        //tracks.add(track3);
+        //p.setTracks(tracks);
+        
+        //podcastService.addPodcast(p);
     }
 
     /**

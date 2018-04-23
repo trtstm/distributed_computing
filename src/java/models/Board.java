@@ -5,11 +5,13 @@
  */
 package models;
 
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,10 +19,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,10 +32,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @NamedQueries({
-    //Some native sql queries to be performed. 
-    @NamedQuery(name = "Podcast.findById", query = "SELECT p FROM Podcast p WHERE p.id = :id"),
-    @NamedQuery(name = "Podcast.findAll", query = "SELECT p FROM Podcast p"),
-    @NamedQuery(name = "Podcast.findByExternalId", query = "SELECT p FROM Podcast p WHERE p.externalId = :id"),    
+    @NamedQuery(name = "Board.findById", query = "SELECT p FROM Board p WHERE p.id = :id"),
+    @NamedQuery(name = "Board.findAll", query = "SELECT p FROM Board p"),
 })
 
 /**
@@ -40,37 +41,59 @@ import javax.validation.constraints.Size;
  * @author timo
  */
 @Entity
-@Table(name = "podcasts")
-public class Podcast implements Serializable {
+@Table(name = "boards")
+public class Board implements Serializable {
+    public static class BoardExcl implements ExclusionStrategy {
+
+        public boolean shouldSkipClass(Class<?> arg0) {
+            return false;
+        }
+
+        public boolean shouldSkipField(FieldAttributes f) {
+
+            return (f.getDeclaringClass() == User.class && f.getName().equals("boards"));
+        }
+
+    }
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "external_id")
-    private Long externalId;
-    
+      
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 128)
     @Column(name = "title")
     private String title;
     
-    //@OneToMany(mappedBy = "podcast", cascade = CascadeType.PERSIST)
-    //private List<Track> tracks;
-
-    public void setTracks(List<Track> tracks) {
-        for(Track track : tracks) {
-            track.setPodcast(this);
-        }
-        //this.tracks = tracks;
-    }
-
+    @Basic(optional = false)
+    @Column(name = "private")
+    private boolean isPrivate;
+    
+    
+    @ManyToOne()
+    @NotNull
+    @JoinColumn(name="user_id")
+    private User user;
+    
+    @ManyToMany(mappedBy = "followedBoards")
+    private List<User> followers = new ArrayList<User>();
+    
+    @ManyToMany
+    @JoinTable(
+      name="BOARD_TRACKS",
+      joinColumns=@JoinColumn(name="board_id", referencedColumnName="id"),
+      inverseJoinColumns=@JoinColumn(name="track_id", referencedColumnName="id"))
+    private List<Track> tracks = new ArrayList<Track>();
+    
     public List<Track> getTracks() {
-        //return tracks;
-        return null;
+        return tracks;
+    }
+    
+    public void addTrack(Track track) {
+        track.addBoard(this);
+        tracks.add(track);
     }
 
     public Long getId() {
@@ -81,14 +104,6 @@ public class Podcast implements Serializable {
         this.id = id;
     }
 
-    public Long getExternalId() {
-        return externalId;
-    }
-
-    public void setExternalId(Long externalId) {
-        this.externalId = externalId;
-    }
-
     public String getTitle() {
         return title;
     }
@@ -97,32 +112,34 @@ public class Podcast implements Serializable {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
+    public boolean isIsPrivate() {
+        return isPrivate;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setIsPrivate(boolean isPrivate) {
+        this.isPrivate = isPrivate;
     }
 
-    public String getArtworkUrl() {
-        return artworkUrl;
+    public User getUser() {
+        return user;
     }
 
-    public void setArtworkUrl(String artworkUrl) {
-        this.artworkUrl = artworkUrl;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "description")
-    private String description;
+    public List<User> getFollowers() {
+        return followers;
+    }
     
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "artwork_url")
-    private String artworkUrl;
+    public void addFollower(User user) {
+        this.followers.add(user);
+    }
 
+    public void setFollowers(List<User> followers) {
+        this.followers = followers;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -133,10 +150,10 @@ public class Podcast implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Podcast)) {
+        if (!(object instanceof Board)) {
             return false;
         }
-        Podcast other = (Podcast) object;
+        Board other = (Board) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }

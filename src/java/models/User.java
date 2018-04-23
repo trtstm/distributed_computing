@@ -6,14 +6,21 @@
 package models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
@@ -106,7 +113,46 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(name = "has_categories")
     private boolean hasCategories = false;
+    
+    @OneToMany(mappedBy="user", cascade = CascadeType.PERSIST)
+    private List<Track> tracks = new ArrayList<Track>();
+    
+    @OneToMany(mappedBy="user", cascade = CascadeType.PERSIST)
+    private List<Board> boards = new ArrayList<Board>();
+    
+    @ManyToMany
+    @JoinTable(
+      name="BOARD_FOLLOWERS",
+      joinColumns=@JoinColumn(name="user_id", referencedColumnName="id"),
+      inverseJoinColumns=@JoinColumn(name="board_id", referencedColumnName="id"))
+    private List<Board> followedBoards = new ArrayList<Board>();
 
+    public List<Track> getTracks() {
+        return tracks;
+    }
+    
+    public void addTrack(Track track) {
+        track.setUser(this);
+        tracks.add(track);
+    }
+    
+    public List<Board> getBoards() {
+        return boards;
+    }
+    
+    public void addBoard(Board board) {
+        boards.add(board);
+    }
+    
+    public List<Board> getFollowedBoards() {
+        return followedBoards;
+    }
+    
+    public void addFollowedBoard(Board board) {
+        board.addFollower(this);
+        followedBoards.add(board);
+    }
+    
     public boolean hasCategories() {
         return hasCategories;
     }
@@ -181,7 +227,7 @@ public class User implements Serializable {
     public void setAnonymous(boolean anonymous) {
         this.anonymous = anonymous;
     }
-
+   
     @Override
     public int hashCode() {
         int hash = 0;

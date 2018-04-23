@@ -5,8 +5,12 @@
  */
 package models;
 
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +19,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -26,6 +31,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @NamedQueries({
+    @NamedQuery(name = "Track.findById", query = "SELECT p FROM Track p WHERE p.id = :id"),
+    @NamedQuery(name = "Track.findAll", query = "SELECT p FROM Track p"),
+    @NamedQuery(name = "Track.findByExternalId", query = "SELECT p FROM Track p WHERE p.externalId = :id"),    
 })
 
 /**
@@ -35,6 +43,19 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "tracks")
 public class Track implements Serializable {
+    public static class TrackExcl implements ExclusionStrategy {
+
+        public boolean shouldSkipClass(Class<?> arg0) {
+            return false;
+        }
+
+        public boolean shouldSkipField(FieldAttributes f) {
+
+            return (f.getDeclaringClass() == User.class && f.getName().equals("tracks"));
+        }
+
+    }
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -72,17 +93,42 @@ public class Track implements Serializable {
     @Column(name = "description", columnDefinition="clob")
     private String description;
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    //@ManyToOne(fetch=FetchType.LAZY)
+    //@NotNull
+    //@JoinColumn(name="podcast_id")
+    //private Podcast podcast;
+    
+    @ManyToOne()
     @NotNull
-    @JoinColumn(name="podcast_id")
-    private Podcast podcast;
+    @JoinColumn(name="user_id")
+    private User user;
+    
+    @ManyToMany(mappedBy = "tracks")
+    private List<Board> boards = new ArrayList<Board>();
+
+    public List<Board> getBoards() {
+        return boards;
+    }
+    
+    public void addBoard(Board board) {
+        boards.add(board);
+    }
+    
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Podcast getPodcast() {
-        return podcast;
+        //return podcast;
+        return null;
     }
 
     public void setPodcast(Podcast podcast) {
-        this.podcast = podcast;
+        //this.podcast = podcast;
     }
 
     public Long getId() {
