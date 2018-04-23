@@ -83,7 +83,7 @@ public class InstallController extends HttpServlet {
         userRepo.addUser(admin);
         
         addHouseOfCards(admin);
-        addRandom(admin);
+        addRandom2(admin);
         
         for(int i = 0; i < 50; i++) {
             User user = new User();
@@ -121,7 +121,7 @@ public class InstallController extends HttpServlet {
         track1.setDuration(3013140);
         track1.setExternalId(new Long(288504081));
         track1.setStreamUrl("https://api.soundcloud.com/tracks/288504081");
-        user.addTrack(track1);
+        userService.addTrack(user, track1);
         
         Track track2 = new Track();
         track2.setTitle("Vulture TV Podcast Ep 6: Mad Men, the Beginning of the End");
@@ -130,7 +130,7 @@ public class InstallController extends HttpServlet {
         track2.setDuration(3002038);
         track2.setExternalId(new Long(199427585));
         track2.setStreamUrl("https://api.soundcloud.com/tracks/199427585");
-        user.addTrack(track2);
+        userService.addTrack(user, track2);
         
         Track track3 = new Track();
         track3.setTitle("The Vulture TV Podcast: Mad Men & the Three F’s - Future, Forecast and Friggin’ Glen is Back");
@@ -139,7 +139,7 @@ public class InstallController extends HttpServlet {
         track3.setDuration(2692588);
         track3.setExternalId(new Long(201802839));
         track3.setStreamUrl("https://api.soundcloud.com/tracks/201802839");
-        user.addTrack(track3);
+        userService.addTrack(user, track3);
         
         Track track4 = new Track();
         track4.setTitle("Doctor Who Podcast - Last Christmas");
@@ -148,7 +148,7 @@ public class InstallController extends HttpServlet {
         track4.setDuration(1715620);
         track4.setExternalId(new Long(183996193));
         track4.setStreamUrl("https://api.soundcloud.com/tracks/183996193");
-        user.addTrack(track4);
+        userService.addTrack(user, track4);
         
         Track track5 = new Track();
         track5.setTitle("Episode 1: An Unearthly Child");
@@ -157,9 +157,9 @@ public class InstallController extends HttpServlet {
         track5.setDuration(3214668);
         track5.setExternalId(new Long(271314672));
         track5.setStreamUrl("https://api.soundcloud.com/tracks/271314672");
-        user.addTrack(track5);
+        userService.addTrack(user, track5);
         
-        userRepo.save(user);
+        //userRepo.save(user);
     }
     
     private void addHouseOfCards(User user) {
@@ -175,7 +175,7 @@ public class InstallController extends HttpServlet {
         track1.setDuration(3828029);
         track1.setExternalId(new Long(330348891));
         track1.setStreamUrl("https://api.soundcloud.com/tracks/330348891");
-        user.addTrack(track1);
+        userService.addTrack(user, track1);
         
         Track track2 = new Track();
         track2.setTitle("Joygasm Podcast Ep. 63: Overwatch League, Soul Calibur 6, Tomb Raider, House Of Cards, & More!");
@@ -184,7 +184,7 @@ public class InstallController extends HttpServlet {
         track2.setDuration(3574669);
         track2.setExternalId(new Long(419802860));
         track2.setStreamUrl("https://api.soundcloud.com/tracks/419802860");
-        user.addTrack(track2);
+        userService.addTrack(user, track2);
         
         Track track3 = new Track();
         track3.setTitle("Podcast ESMAC N° 79 - House of Cards (4ta Temporada)");
@@ -193,7 +193,7 @@ public class InstallController extends HttpServlet {
         track3.setDuration(2615729);
         track3.setExternalId(new Long(273664581));
         track3.setStreamUrl("https://api.soundcloud.com/tracks/273664581");
-        user.addTrack(track3);
+        userService.addTrack(user, track3);
         
         Track track4 = new Track();
         track4.setTitle("Bonus Episode - House of Cards");
@@ -202,9 +202,9 @@ public class InstallController extends HttpServlet {
         track4.setDuration(295811);
         track4.setExternalId(new Long(250185548));
         track4.setStreamUrl("https://api.soundcloud.com/tracks/250185548");
-        user.addTrack(track4);
+        userService.addTrack(user, track4);
         
-        userRepo.save(user);
+        //userRepo.save(user);
         
         boardService.addTrack(board, track1);
         boardService.addTrack(board, track2);
@@ -225,7 +225,7 @@ public class InstallController extends HttpServlet {
         track1.setDuration(2813625);
         track1.setExternalId(new Long(270949310));
         track1.setStreamUrl("https://api.soundcloud.com/tracks/271018327");
-        user.addTrack(track1);
+        userService.addTrack(user, track1);
         
         Track track2 = new Track();
         track2.setTitle("Game Of Thrones Season Finale Preview with Jason Whitlock");
@@ -234,7 +234,7 @@ public class InstallController extends HttpServlet {
         track2.setDuration(2646948);
         track2.setExternalId(new Long(270949310));
         track2.setStreamUrl("https://api.soundcloud.com/tracks/270949310");
-        user.addTrack(track2);
+        userService.addTrack(user, track2);
 
         Track track3 = new Track();
         track3.setTitle("Bastard Bowl Recap");
@@ -243,7 +243,7 @@ public class InstallController extends HttpServlet {
         track3.setDuration(3093945);
         track3.setExternalId(new Long(270109179));
         track3.setStreamUrl("https://api.soundcloud.com/tracks/270109179");
-        user.addTrack(track3);
+        userService.addTrack(user, track3);
         
         
         Track track4 = new Track();
@@ -253,7 +253,7 @@ public class InstallController extends HttpServlet {
         track4.setDuration(1466023);
         track4.setExternalId(new Long(395471322));
         track4.setStreamUrl("https://api.soundcloud.com/tracks/395471322");
-        user.addTrack(track4);
+        userService.addTrack(user, track4);
         
         Track track5 = new Track();
         track5.setTitle("1e09 - We Waren Ned Zo Lekker Bezig");
@@ -262,9 +262,9 @@ public class InstallController extends HttpServlet {
         track5.setDuration(5045683);
         track5.setExternalId(new Long(408533214));
         track5.setStreamUrl("https://api.soundcloud.com/tracks/408533214");
-        user.addTrack(track5);
+        userService.addTrack(user, track5);
         
-        userRepo.save(user);
+        //userRepo.save(user);
         
         boardService.addTrack(board, track1);
         boardService.addTrack(board, track2);
@@ -286,7 +286,7 @@ public class InstallController extends HttpServlet {
         track1.setDuration(5264192);
         track1.setExternalId(new Long(273259460));
         track1.setStreamUrl("https://api.soundcloud.com/tracks/273259460");
-        user.addTrack(track1);
+        userService.addTrack(user, track1);
         
         Track track2 = new Track();
         track2.setTitle("Podcast Cinescalero Volumen XXI: Orange is the New Black (cuarta temporada)");
@@ -295,7 +295,7 @@ public class InstallController extends HttpServlet {
         track2.setDuration(3676347);
         track2.setExternalId(new Long(270919709));
         track2.setStreamUrl("https://api.soundcloud.com/tracks/270919709");
-        user.addTrack(track2);
+        userService.addTrack(user, track2);
 
         Track track3 = new Track();
         track3.setTitle("Podcast Cinescalero Volumen VI: Sobre Orange Is the New Black");
@@ -304,7 +304,7 @@ public class InstallController extends HttpServlet {
         track3.setDuration(2480898);
         track3.setExternalId(new Long(154238224));
         track3.setStreamUrl("https://api.soundcloud.com/tracks/154238224");
-        user.addTrack(track3);
+        userService.addTrack(user, track3);
         
         
         Track track4 = new Track();
@@ -314,7 +314,7 @@ public class InstallController extends HttpServlet {
         track4.setDuration(5264192);
         track4.setExternalId(new Long(273259460));
         track4.setStreamUrl("https://api.soundcloud.com/tracks/273259460");
-        user.addTrack(track4);
+        userService.addTrack(user, track4);
         
         Track track5 = new Track();
         track5.setTitle("Podcast ESMAC N° 45 - Orange is the New Black 3ra Temporada");
@@ -323,9 +323,9 @@ public class InstallController extends HttpServlet {
         track5.setDuration(4363615);
         track5.setExternalId(new Long(236722246));
         track5.setStreamUrl("https://api.soundcloud.com/tracks/236722246");
-        user.addTrack(track5);
+        userService.addTrack(user, track5);
         
-        userRepo.save(user);
+        //userRepo.save(user);
         
         boardService.addTrack(board, track1);
         boardService.addTrack(board, track2);
@@ -343,7 +343,7 @@ public class InstallController extends HttpServlet {
         track1.setDuration(5810908);
         track1.setExternalId(new Long(308469864));
         track1.setStreamUrl("https://api.soundcloud.com/tracks/308469864");
-        user.addTrack(track1);
+        userService.addTrack(user, track1);
         
         Track track2 = new Track();
         track2.setTitle("Walking Dead Season 7, Episode 10 Recap | New Best Friends");
@@ -352,7 +352,7 @@ public class InstallController extends HttpServlet {
         track2.setDuration(3556356);
         track2.setExternalId(new Long(308618130));
         track2.setStreamUrl("https://api.soundcloud.com/tracks/308618130");
-        user.addTrack(track2);
+        userService.addTrack(user, track2);
 
         Track track3 = new Track();
         track3.setTitle("Walking Dead Season 1 Rewatch, Episode 6: TS-19");
@@ -361,7 +361,7 @@ public class InstallController extends HttpServlet {
         track3.setDuration(4099779);
         track3.setExternalId(new Long(307007809));
         track3.setStreamUrl("https://api.soundcloud.com/tracks/307007809");
-        user.addTrack(track3);
+        userService.addTrack(user, track3);
         
         Track track4 = new Track();
         track4.setTitle("24 Legacy: Series Premiere Recap Podcast");
@@ -370,9 +370,9 @@ public class InstallController extends HttpServlet {
         track4.setDuration(2686840);
         track4.setExternalId(new Long(306349497));
         track4.setStreamUrl("https://api.soundcloud.com/tracks/306349497");
-        user.addTrack(track4);
+        userService.addTrack(user, track4);
         
-        userRepo.save(user);
+        //userRepo.save(user);
 
     }
     

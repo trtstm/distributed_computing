@@ -92,7 +92,6 @@ public class Board implements Serializable {
     }
     
     public void addTrack(Track track) {
-        track.addBoard(this);
         tracks.add(track);
     }
 

@@ -104,7 +104,7 @@ public class Track implements Serializable {
     @JoinColumn(name="user_id")
     private User user;
     
-    @ManyToMany(mappedBy = "tracks")
+    @ManyToMany(mappedBy = "tracks", fetch = FetchType.EAGER)
     private List<Board> boards = new ArrayList<Board>();
 
     public List<Board> getBoards() {

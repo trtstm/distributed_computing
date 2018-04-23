@@ -114,7 +114,7 @@ public class User implements Serializable {
     @Column(name = "has_categories")
     private boolean hasCategories = false;
     
-    @OneToMany(mappedBy="user", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy="user")
     private List<Track> tracks = new ArrayList<Track>();
     
     @OneToMany(mappedBy="user", cascade = CascadeType.PERSIST)
@@ -132,7 +132,6 @@ public class User implements Serializable {
     }
     
     public void addTrack(Track track) {
-        track.setUser(this);
         tracks.add(track);
     }
     

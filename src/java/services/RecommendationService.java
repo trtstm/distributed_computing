@@ -5,6 +5,7 @@
  */
 package services;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -19,6 +20,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
+import models.Board;
 import models.Podcast;
 import models.Track;
 import models.User;
@@ -44,7 +46,26 @@ public class RecommendationService {
     }
     
     public List<Track> calculateRecommendedTracks(User user) {
-        return trackRepo.findRecommendations(user);
+        List<Track> tracks = trackRepo.findRecommendations(user);
+        List<Track> results = new ArrayList<Track>();
+        for(Track track : tracks) {
+            if(results.size() >= 8) {
+                break;
+            }
+            
+            boolean found = false;
+            for(Board board : user.getBoards()) {
+                if(board.getTracks().contains(track)) {
+                    found = true;
+                    break;
+                }
+            }
+            if(!found) {
+                results.add(track);
+            }
+        }
+        
+        return results;
     }
 
     // Add business logic below. (Right-click in editor and choose

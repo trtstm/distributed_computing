@@ -16,8 +16,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 import models.Board;
+import models.Track;
 import models.User;
 import repositories.BoardRepository;
+import repositories.TrackRepository;
 import repositories.UserRepository;
         
 /**
@@ -32,6 +34,9 @@ public class UserService {
     @EJB
     BoardRepository boardRepo;
     
+    @EJB
+    TrackRepository trackRepo;
+    
     public void addBoard(User user, Board board) {
         user.addBoard(board);
         board.setUser(user);
@@ -44,7 +49,12 @@ public class UserService {
         user.addFollowedBoard(board);
         board.addFollower(user);
         userRepo.save(user);
-        
+    }
+    
+    public void addTrack(User user, Track track) {
+        user.addTrack(track);
+        track.setUser(user);
+        trackRepo.addTrack(track);
     }
 
     // Add business logic below. (Right-click in editor and choose
