@@ -129,6 +129,11 @@ public class BoardController extends HttpServlet {
             Board board = boardRepo.getById(boardId);
             Track track = trackRepo.getById(trackId);
             
+            if(board.getUser() != user) {
+                response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                return;
+            }
+            
             boardService.addTrack(board, track);
             
             BoardResponse boardResponse = new BoardResponse(board);
@@ -144,6 +149,11 @@ public class BoardController extends HttpServlet {
             
             Board board = boardRepo.getById(boardId);
             Track track = trackRepo.getById(trackId);
+            
+            if(board.getUser() != user) {
+                response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                return;
+            }
             
             boardService.removeTrack(board, track);
             
