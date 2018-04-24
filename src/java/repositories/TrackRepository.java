@@ -5,6 +5,7 @@
  */
 package repositories;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -64,6 +65,21 @@ public class TrackRepository {
        return this.entityManager.createNamedQuery("Track.findRecommendations")
                .setParameter("u", user)
                 .getResultList();
+    }
+    
+    public List<Track> findPinned(User user) {
+       List<Track> pins = this.entityManager.createNamedQuery("Track.findPinned")
+               .setParameter("u", user)
+                .getResultList();
+       
+       List<Track> results = new ArrayList<Track>();
+       for(Track track : pins) {
+           if(!results.contains(track)) {
+               results.add(track);
+           }
+       }
+       
+       return results;
     }
            
     public void save(Track track) {

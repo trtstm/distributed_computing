@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,8 +32,8 @@ import services.RegistrationService;
  *
  * @author timo
  */
-@WebServlet(name = "WelcomeController", urlPatterns = {"/welcome"})
-public class WelcomeController extends HttpServlet {  
+@WebServlet(name = "PinsController", urlPatterns = {"/pins"})
+public class PinsController extends HttpServlet {  
     @EJB
     TrackRepository trackRepo;
     
@@ -82,15 +83,21 @@ public class WelcomeController extends HttpServlet {
         User user = (User)(request.getSession().getAttribute("user"));
         
         List<Track> pinnedTracks = trackRepo.findPinned(user);
-        
+                
         List<TrackResponse> trackResponse = new ArrayList<TrackResponse>();
         for(Track track : pinnedTracks) {
             trackResponse.add(new TrackResponse(track));
         }
-        String json = new Gson().toJson(trackResponse);
-        request.setAttribute("pinnedTracks", json);
         
-        request.getRequestDispatcher("/welcome.jsp").forward(request, response);
+        HashMap<String, Object> result = new HashMap<String, Object>();
+        result.put("tracks", trackResponse);
+        
+        String json = new Gson().toJson(result);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);
+        
+        
     }
 
     /**

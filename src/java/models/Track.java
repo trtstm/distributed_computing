@@ -35,6 +35,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Track.findAll", query = "SELECT p FROM Track p"),
     @NamedQuery(name = "Track.findByExternalId", query = "SELECT p FROM Track p WHERE p.externalId = :id"),   
     @NamedQuery(name = "Track.findRecommendations", query = "SELECT t FROM Track t WHERE t.user != :u"),    
+    @NamedQuery(name = "Track.findPinned", query = "SELECT t FROM Track t left outer join t.boards trackBoard WHERE trackBoard.user = :u"),    
 })
 
 /**
@@ -104,7 +105,7 @@ public class Track implements Serializable {
     @JoinColumn(name="user_id")
     private User user;
     
-    @ManyToMany(mappedBy = "tracks", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "tracks")
     private List<Board> boards = new ArrayList<Board>();
 
     public List<Board> getBoards() {

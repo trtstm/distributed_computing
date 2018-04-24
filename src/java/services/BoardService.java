@@ -19,6 +19,7 @@ import models.Board;
 import models.Track;
 import models.User;
 import repositories.BoardRepository;
+import repositories.TrackRepository;
 import repositories.UserRepository;
         
 /**
@@ -29,22 +30,34 @@ import repositories.UserRepository;
 public class BoardService {
     @EJB
     BoardRepository boardRepo;
+    @EJB
+    TrackRepository trackRepo;
     
     public void addTrack(Board board, Track track) {
+        if(board.getTracks().contains(track)) {
+            return;
+        }
+        
         board.addTrack(track);
         track.addBoard(board);
         
         boardRepo.save(board);
+        trackRepo.save(track);
     }
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
 
     public void removeTrack(Board board, Track track) {
+        if(!board.getTracks().contains(track)) {
+            return;
+        }
+        
         board.getTracks().remove(track);
         track.getBoards().remove(board);
         
         boardRepo.save(board);
+        trackRepo.save(track);
     }
     
 }

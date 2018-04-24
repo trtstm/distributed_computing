@@ -106,6 +106,14 @@ public class BoardController extends HttpServlet {
             followedBoards.add(new BoardResponse(board));
         }
         
+        if(request.getParameter("action") != null && request.getParameter("action").equals("mine")) {
+            String json = new Gson().toJson(userBoards);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
+            return;
+        }
+        
         
         HashMap<String, List<BoardResponse>> result = new HashMap<String, List<BoardResponse>>();
         result.put("userBoards", userBoards);
