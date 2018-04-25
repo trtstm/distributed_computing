@@ -12,16 +12,6 @@
     <iframe width="100%" height="166" scrolling="no" frameborder="no"
       src="https://w.soundcloud.com/player/?url=<c:out value="${track.getStreamUrl()}"/>">
     </iframe>
-    
-    <div id="track-app">
-        <p>Track added by {{track.user.username}}</p>
-        
-        <ul>
-            <li @click="pin(board, index)" v-for="(board, index) in boards">{{board.title}} <span v-if="hasPinned(board, track)">(PINNED)</span></li>
-        </ul>
-        <input v-model="boardName" />
-        <button @click="addBoard">Add board</button>
-    </div>
 </div>
        
 

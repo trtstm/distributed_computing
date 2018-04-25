@@ -18,6 +18,21 @@
         </button>
       </div>
       <div class="modal-body">
+        <form class="form-inline">
+          <div class="form-group mb-2">
+            <input type="text" v-model="newBoard.title" class="form-control-plaintext" id="staticEmail2" placeholder="board title">
+          </div>
+          <div class="form-group mx-sm-3 mb-2">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" v-model="newBoard.isPrivate" id="defaultCheck1">
+              <label class="form-check-label" for="defaultCheck1">
+                Private
+              </label>
+            </div>
+          </div>
+          <a href="#" @click="addBoard()" class="btn btn-primary mb-2">Add Board</a>
+        </form>
+          
             <div v-for="modalBoard in modalBoards" class="form-check">
               <label class="form-check-label">
                 <input type="checkbox" class="form-check-input" v-model="modalBoard.pinned">{{modalBoard.board.title}}
@@ -26,7 +41,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" @click="savePins()">Save changes</button>
+        <button type="button" class="btn btn-primary" @click="savePins()">Save pins</button>
       </div>
     </div>
   </div>
@@ -61,7 +76,7 @@
         <div class="card" v-for="track in pinnedTracks">
         <img class="card-img-top img-fluid" :src="(track.artworkUrl ? track.artworkUrl : 'resources/no-image.png')" alt="Card Columns 1">
         <div class="card-overlay">
-            <div class="text"><a href="#"><span class="oi oi-play-circle icon-play"></span></a></div>
+            <div class="text"><a :href="'<c:url value="/tracks" />' + '?id=' + track.id.toString()"><span class="oi oi-play-circle icon-play"></span></a></div>
         </div>
         <div class="card-body">
           <div class="row">

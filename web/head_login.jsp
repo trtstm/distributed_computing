@@ -23,7 +23,7 @@
         
         <script>
             window.GLOBALS = {
-                root_url: '/pinterest/',
+                root_url: '${pageContext.request.contextPath}/',
             };
         </script>
     </head>

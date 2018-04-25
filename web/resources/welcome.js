@@ -13,11 +13,35 @@ $(function() {
                userBoards: [],
                followedBoards: [],
                selectedBoard: null,
+               newBoard: {title: '', isPrivate: false},
                rootUrl: GLOBALS.root_url,
            };
        },
        
        methods: {
+           addBoard() {
+               var self = this;
+
+             if(!self.newBoard.title) {
+                 return;
+             }  
+             
+                $.getJSON({
+                    url: GLOBALS.root_url + 'boards?action=create',
+                    method: 'post',
+                    data: {
+                        title: self.newBoard.title,
+                        isPrivate: self.newBoard.isPrivate,
+                    }
+                }).done(function(resp) {
+                    $.when.apply(this, self.fetchData()).then(function() {
+                        self.showBoardsModal(self.selectedTrack);
+                    });
+                });
+                
+                self.newBoard.title = '';
+                self.newBoard.isPrivate = false;
+           },
          showBoardsModal(track) {
              this.selectedTrack = track;
              this.modalBoards = [];
