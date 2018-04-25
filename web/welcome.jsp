@@ -61,7 +61,7 @@
         <div class="card" v-for="track in pinnedTracks">
         <img class="card-img-top img-fluid" :src="(track.artworkUrl ? track.artworkUrl : 'resources/no-image.png')" alt="Card Columns 1">
         <div class="card-overlay">
-          <div class="text"><span class="oi oi-play-circle icon-play"></span></div>
+            <div class="text"><a href="#"><span class="oi oi-play-circle icon-play"></span></a></div>
         </div>
         <div class="card-body">
           <div class="row">

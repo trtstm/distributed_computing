@@ -81,16 +81,22 @@ span{
   opacity: 0.3;
 }
 
+.modal-title {
+    color: #333;
+}
+
 .card:hover .card-overlay{
   opacity: 1;
 }
 .icon-play-main{
 
+  color: white;
   font-size: 150px;
   cursor: pointer;
   margin-top: 10%
 }
 .icon-play{
+    cursor: pointer;
     color: white;
 	font-size: 90px;
 }

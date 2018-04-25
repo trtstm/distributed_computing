@@ -89,39 +89,34 @@ $(function() {
          
          fetchData() {
            var self = this;
-            $.getJSON({
+            return [$.getJSON({
                 url: GLOBALS.root_url + 'pins',
                 method: 'get',
             }).done(function(resp) {
                 self.pinnedTracks = resp.tracks;
-            });
-            
+            }),
             $.getJSON({
                 url: GLOBALS.root_url + 'boards?action=mine',
                 method: 'get',
             }).done(function(resp) {
                 self.userBoards = resp;
-            });
+            }),
             
             $.getJSON({
                 url: GLOBALS.root_url + 'boards?action=followed',
                 method: 'get',
             }).done(function(resp) {
                 self.followedBoards = resp;
-            });
+            }),
             
             $.getJSON({
                 url: GLOBALS.root_url + 'recommendations',
                 method: 'get',
             }).done(function(resp) {
                 self.recommendedTracks = resp;
-            });
-         }
-       },
-       
-       mounted() {
-           this.fetchData();
-
+            }),];
+         },
+         initSliders: function() {
             $('#mixedSlider').multislider({
                     duration: 750,
                     interval: 3000
@@ -131,6 +126,18 @@ $(function() {
                     duration: 750,
                     interval: 3000
             });
+         }
+       },
+       
+       mounted() {
+           var self = this;
+           $.when.apply(this, this.fetchData()).then(function() {
+            self.$nextTick(function() {
+                self.initSliders();
+            });
+           });
+
+           
        },
    }); 
 });
