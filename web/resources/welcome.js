@@ -6,11 +6,13 @@ $(function() {
        },
        data() {
            return {
-               recommendations: [],
+               recommendedTracks: [],
                pinnedTracks: [],
                selectedTrack: null,
                modalBoards: [],
                userBoards: [],
+               followedBoards: [],
+               selectedBoard: null,
                rootUrl: GLOBALS.root_url,
            };
        },
@@ -26,6 +28,24 @@ $(function() {
                  });
              }
              $('#boardsModal').modal({});
+         },
+         unfollow() {
+             var self = this;
+            $.ajax({
+                url: GLOBALS.root_url + 'boards?action=unfollow',
+                method: 'post',
+                data: {
+                    board: self.selectedBoard.id,
+                },
+            }).done(function(resp) {
+                self.fetchData();
+            });
+            
+            $('#confirmUnfollow').modal('hide');  
+         },
+         unfollowBoard(board) {
+             this.selectedBoard = board;
+           $('#confirmUnfollow').modal();  
          },
          savePins() {
              var self = this;
@@ -82,11 +102,35 @@ $(function() {
             }).done(function(resp) {
                 self.userBoards = resp;
             });
+            
+            $.getJSON({
+                url: GLOBALS.root_url + 'boards?action=followed',
+                method: 'get',
+            }).done(function(resp) {
+                self.followedBoards = resp;
+            });
+            
+            $.getJSON({
+                url: GLOBALS.root_url + 'recommendations',
+                method: 'get',
+            }).done(function(resp) {
+                self.recommendedTracks = resp;
+            });
          }
        },
        
        mounted() {
            this.fetchData();
+
+            $('#mixedSlider').multislider({
+                    duration: 750,
+                    interval: 3000
+            });
+            
+            $('#recommendedSlider').multislider({
+                    duration: 750,
+                    interval: 3000
+            });
        },
    }); 
 });

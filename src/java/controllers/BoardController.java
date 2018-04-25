@@ -114,6 +114,14 @@ public class BoardController extends HttpServlet {
             return;
         }
         
+        if(request.getParameter("action") != null && request.getParameter("action").equals("followed")) {
+            String json = new Gson().toJson(followedBoards);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
+            return;
+        }
+        
         
         HashMap<String, List<BoardResponse>> result = new HashMap<String, List<BoardResponse>>();
         result.put("userBoards", userBoards);
@@ -197,6 +205,20 @@ public class BoardController extends HttpServlet {
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(json);
+            return;
+        } else if(action.equals("follow")) {
+            Long boardId = Long.parseLong(request.getParameter("board"));
+            
+            Board board = boardRepo.getById(boardId);
+                       
+            userService.followBoard(user, board);
+            return;
+        } else if(action.equals("unfollow")) {
+            Long boardId = Long.parseLong(request.getParameter("board"));
+            
+            Board board = boardRepo.getById(boardId);
+            
+            userService.unfollowBoard(user, board);
             return;
         }
     }

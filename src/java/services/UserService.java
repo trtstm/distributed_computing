@@ -46,9 +46,29 @@ public class UserService {
     }
     
     public void followBoard(User user, Board board) {
+        if(board.isIsPrivate() && board.getUser() != user) {
+            return;
+        }
+        
+        if(board.getFollowers().contains(user)) {
+            return;
+        }
+        
         user.addFollowedBoard(board);
         board.addFollower(user);
         userRepo.save(user);
+        boardRepo.save(board);
+    }
+    
+    public void unfollowBoard(User user, Board board) {
+        if(!board.getFollowers().contains(user)) {
+            return;
+        }
+        
+        user.getFollowedBoards().remove(board);
+        board.getFollowers().remove(user);
+        userRepo.save(user);
+        boardRepo.save(board);
     }
     
     public void addTrack(User user, Track track) {

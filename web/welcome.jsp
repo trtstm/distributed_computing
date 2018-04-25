@@ -12,7 +12,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Pin/Unpin</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -27,6 +27,26 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" @click="savePins()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+    
+<div class="modal fade" id="confirmUnfollow" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to unfollow?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <p>Are you sure you want to unfollow this board?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" @click="unfollow">Unfollow</button>
       </div>
     </div>
   </div>
@@ -57,68 +77,40 @@
   </div>
   <h3>Following</h3>
   <hr>
-<div id="mixedSlider" class="">
-      <div class="MS-content"><div class="item">
+<div id="mixedSlider" class="podflixSlider">
+      <div class="MS-content">
+          <div class="item" v-for="board in followedBoards" @click="unfollowBoard(board)">
               <div class="imgTitle">
-                  <h2 class="blogTitle">Orange is the new black</h2>
-                  <img src="images/orange-is-the-new-black.jpg" alt="">
+                  <h2 class="blogTitle">{{board.title}}</h2>
+                  <img src="resources/images/movies.jpg" alt="">
               </div>
-          </div><div class="item">
-              <div class="imgTitle">
-                  <h2 class="blogTitle">Game of Thrones</h2>
-                  <img src="images/rsz_game-of-thrones.jpg" alt="">
-              </div>
-          </div><div class="item">
-              <div class="imgTitle">
-                  <h2 class="blogTitle">House of cards</h2>
-                  <img src="images/rsz_house-of-cards.jpg" alt="">
-              </div>
-          </div><div class="item">
-              <div class="imgTitle">
-                  <h2 class="blogTitle">Scandal</h2>
-                  <img src="images/rsz_scandal.jpg" alt="">
-              </div>
-          </div><div class="item">
-              <div class="imgTitle">
-                  <h2 class="blogTitle">Prison break</h2>
-                  <img src="images/rsz_prison-break.jpg" alt="">
-              </div>
-          </div><div class="item">
-              <div class="imgTitle">
-                  <h2 class="blogTitle">Breaking bad</h2>
-                  <img src="images/rsz_breaking-bad.jpg" alt="">
-              </div>
-          </div><div class="item">
-              <div class="imgTitle">
-                  <h2 class="blogTitle">Sherlock</h2>
-                  <img src="images/rsz_sherlock.jpg" alt="">
-              </div>
-          </div></div>
+          </div>
+      </div>
       <div class="MS-controls">
           <button class="MS-left"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
           <button class="MS-right"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
       </div>
   </div>
+  
+  <h3>Recommended For You</h3>
+<div id="recommendedSlider" class="podflixSlider">
+      <div class="MS-content">
+          <div class="item" v-for="track in recommendedTracks" @click="showBoardsModal(track)">
+              <div class="imgTitle">
+                  <h2 class="blogTitle">{{track.title}}</h2>
+                  <img :src="(track.artworkUrl ? track.artworkUrl : 'resources/no-image.png')" alt="">
+              </div>
+          </div>
+      </div>
+      <div class="MS-controls">
+          <button class="MS-left"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
+          <button class="MS-right"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
+      </div>
+  </div>
+
 </div>
     
-    
-    <div class="container">
-        
-        <h3>Recommended For You</h3>
-        <div class="row">
-            <div v-for="track in recommendations" class="col-3">
-                <div class="card track-card" :title="track.description">
-                  <div class="podflix-image" :style="{backgroundImage: 'url(' + (track.artworkUrl ? track.artworkUrl : 'resources/no-image.png') + ')'}"></div>
-                  <div class="card-body">
-                    <h5 class="card-title">{{track.title}} <small>Uploaded by: {{track.user.username}}</small></h5>
-                    
-                    <a :href="rootUrl + 'tracks?id=' + track.id.toString()" class="">Read More</a>
-                  </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+   
 </div>
 
 <script src="resources/welcome.js"></script>
