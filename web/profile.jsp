@@ -7,19 +7,28 @@
 
 <%@include file="head_with_nav.jsp"%>
 
-  <div class="container-fluid">
-    <div class="row profile">
-      <div class="col-md-8"><h1><c:out value="${user.getUsername()}"/></h1></div>
-      <div class="col-md-2"><h5>Following 5</h5></div>
-      <div class="col-md-2"><h5>Followers 4</h5></div>
+<div class="container-fluid" style="text-align: center; background: #8e8e8e; height: 300px;">
+    <div class="row">
+            <div id="demo" class="col-md-12" data-ride="carousel">
+                    <div class="row" style="display: block;">
+                            <!--INCLUDES THE IMAGE OF THE PROFILE OR AN AVATAR-->
+                            <p style="border-radius: 100%; margin: 0 auto; margin-top: 150px;"><i class="fa fa-user" aria-hidden="true" style="width: 20%; height: 20%; color: white; font-size: 50px;"></i></p>
+                            <p style="color: black;">ANGELA MIZERO</p>
+                    </div>
+            </div>
     </div>
-  </div>
+    </div>
+<div class="container items">
+<h2>Following</h2>
+
   <div class="container podcasts">
 <div class="bd-example bd-example-tabs">
-  <nav class="nav nav-tabs" id="nav-tab" role="tablist">
-    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="home" aria-expanded="true">Boards</a>
-    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="profile" aria-expanded="false">People</a>
-  </nav>
+  <nav>
+    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Boards</a>
+            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Users</a>
+    </div>
+</nav>
   <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade active show" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" aria-expanded="true">
             <div class="card-columns">
@@ -121,9 +130,30 @@
         </div>
   </div>
     </div>
-    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" aria-expanded="false">
+  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" aria-expanded="false">
+    <div class="row" style="padding-top: 10px;">
+        <!--HERE ALL THE USERS THAT THE PROFILE FOLLOWS-->
+          <div class="col-md-4">
+                <i class="fa fa-user" aria-hidden="true" style="width: 20%; height: auto; color:white;"></i>
      
+                <p>Anoushka</p>
+                <p>Unfollow</p>
+            </div>
+          <div class="col-md-4">
+                <i class="fa fa-user" aria-hidden="true" style="width: 20%; height: auto;color:white;"></i>
+       
+                <p>Anoushka</p>
+                <p>Unfollow</p>
+            </div>
+          <div class="col-md-4">
+                <i class="fa fa-user" aria-hidden="true" style="width: 20%; height: auto;color:white;"></i>
+            
+                <p>Anoushka</p>
+                <p>Unfollow</p>
+            </div>
+        </div>
     </div>
+   </div>
   </div>
 </div>
   </div>

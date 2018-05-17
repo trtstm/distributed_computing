@@ -6,7 +6,66 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 
 <%@include file="head_with_nav.jsp"%>
+<div class="container">
+  <div class="row">
+    <div id="demo" class="col-md-10 carousel slide" data-ride="carousel">
 
+      <!-- Indicators -->
+      <ul class="carousel-indicators">
+        <li data-target="#demo" data-slide-to="0" class="active"></li>
+        <li data-target="#demo" data-slide-to="1"></li>
+        <li data-target="#demo" data-slide-to="2"></li>
+      </ul>
+
+      <div class="carousel-inner inner">
+        <div class="carousel-item active">
+          <img src="resources/Imagesnew/got.jpg" alt="Los Angeles">
+        </div>
+        <div class="carousel-item">
+          <img src="resources/Imagesnew/sherlock1.jpg" alt="Chicago">
+        </div>
+        <div class="carousel-item">
+          <img src="resources/Imagesnew/jessica.jpg" alt="New York">
+        </div>
+      </div>
+
+      <!-- Left and right controls -->
+      <a class="carousel-control-prev" href="#demo" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </a>
+      <a class="carousel-control-next" href="#demo" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </a>
+
+    </div>
+    <div class="col-md-2 side" style="margin-top: 20px; background: #474747;">
+      <div class="wrapper">
+
+          <nav id="sidebar">
+              <!-- Sidebar Header -->
+              <!-- Sidebar Links -->
+              <ul class="list-unstyled components">
+                  <li class="active"><a href="#">BOARDS</a></li>
+                  <li><a href="#">RECOMMENDED</a></li>
+
+                  <li><!-- Link with dropdown items -->
+                      <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">LISTINGS</a>
+                      <ul class="collapse list-unstyled" id="homeSubmenu">
+                          <li><a href="#">Page</a></li>
+                          <li><a href="#">Page</a></li>
+                          <li><a href="#">Page</a></li>
+                      </ul>
+
+                  <li><a href="#">TRENDING</a></li>
+                  <li><a href="#">SEARCH</a></li>
+                  <li><a href="#">SETTINGS</a></li>
+                  <li><a href="#">STATISTICS</a></li>
+              </ul>
+          </nav>
+    </div>
+    </div>
+  </div>
+</div>
 <div id="welcome-app">
 <div class="modal fade" id="boardsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -66,10 +125,102 @@
     </div>
   </div>
 </div>
+<div class="container items">
+	<h2>Boards you follow</h2>
+	<!-- Tabs -->
+<section id="tabs">
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 ">
+                <nav>
+                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Comedy</a>
+                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Romance</a>
+                        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Thriller</a>
+                        <a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">Others</a>
+                </div>
+            </nav>
+            <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+
+                <div class="tab-pane active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <div class="container accordion">
+                      <ul>
+                        <li style="background-image: url(resources/Imagesnew/got.jpg); background-size:cover;">
+                          <div> <a href="#">
+                            <h2>Game of thrones</h2>
+                            <p>Unfollow</p>
+                            </a> </div>
+                        </li>
+                        <li style="background-image: url(resources/Imagesnew/hoc.jpg); background-size:cover;">
+                          <div> <a href="#">
+                            <h2>Breaking bad</h2>
+                            <p>Unfollow</p>
+                            </a> </div>
+                        </li>
+                        <li style="background-image: url(resources/Imagesnew/orange.jpg); background-size:cover;">
+                          <div> <a href="#">
+                            <h2>Prison break</h2>
+                            <p>Unfollow</p>
+                            </a> </div>
+                        </li>
+                        <li style="background-image: url(resources/Imagesnew/prisonbreak.jpg); background-size:cover;">
+                          <div> <a href="#">
+                            <h2>Scandal</h2>
+                            <p>More</p>
+                            </a> </div>
+                        </li>
+                        <li style="background-image: url(resources/Imagesnew/scandal.jpg); background-size:cover;">
+                          <div> <a href="#">
+                            <h2>House of cards</h2>
+                            <p>More</p>
+                            </a> </div>
+                        </li>
+                        <li style="background-image: url(resources/Imagesnew/sherlock.jpg); background-size:cover;">
+                          <div> <a href="#">
+                            <h2>Orange is the new black</h2>
+                            <p>More</p>
+                            </a> </div>
+                        </li>
+                      </ul>
+                    </div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                            Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
+                    </div>
+                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                            Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
+                    </div>
+                    <div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
+                            Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+<!-- ./Tabs -->
+</div>    
     
-<div class="container-fluid banner">
-   		<div class="text" style="text-align: center;"><span class="oi oi-play-circle icon-play-main"></span></div>
-  </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!--THE PREVIOUS CODE STARTS FROM HERE-->
+    
+    
+    
+    
     
 <div class="container-fluid">
     <div class="card-columns">
